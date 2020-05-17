@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>ToDo-testWork</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <link rel="stylesheet" href="styles/main.min.css">
+    </head>
+    <body>
+        <div class="todo">
+            <div class="todo__content">
+                <h1 class="todo__title">
+                    ToDo List
+                </h1>
+                <div class="todo__groupsList">
+                    <div class="todo__groupsControls">
+                        <button class="todo__button" type="button" @click="addGroup()">
+                            Добавить группу
+                        </button>
+                    </div>
+                    <h2 class="todo__groupsListTitle">
+                        Список групп:
+                    </h2>
+                    <div class="todo__groupsListBox">
+                        <div class="todo__groupItem" :class="{isActive: group.id === currentGroupID}"
+                             v-for="(group, index) in groups"
+                             @click="currentGroupID = group.id">
+                            <div class="todo__groupItemHeader">
+                                <input class="todo__groupTitle"
+                                       v-model="group.name"
+                                       placeholder="Название группы">
+                                <button class="todo__deleteButton"
+                                        type="button"
+                                        @click="confirmDelete(index, 'group')"
+                                        :disabled="groups.length === 1">
+                                    <img src="img/trashcan-green.png" alt="Удалить группу">
+                                </button>
+                            </div>
+                            <h3 class="todo__groupItemCardsListTitle">
+                                Задачи:
+                            </h3>
+                            <div class="todo__groupItemCardsList">
+                                <div class="todo__groupItemCardTitle"
+                                     v-for="cardTitle in group.cards.map(function (item) {return item.name})"
+                                     @click.self="currentGroupID = group.id">
+                                    {{ cardTitle }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="todo__currentGroup">
+                    <input type="text" class="todo_currentGroupTitle"
+                           v-model="currentGroup.name"
+                           placeholder="Название группы">
+                    <div class="todo__currentGroupControls">
+                        <input type="text" class="todo__cardsFilter"
+                        placeholder="Фильтр" v-model="currentGroup.filter">
+                        <div class="todo__checkboxGroup">
+                            <input type="checkbox" class="todo__checkbox"
+                                    :id="'group_' + currentGroup.id" v-model="currentGroup.doneFilter">
+                            <label :for="'group_' + currentGroup.id" class="todo__checkboxLabel">
+                                Выполненные
+                            </label>
+                        </div>
+                        <button class="todo__button" type="button"
+                                @click="addCard()">
+                            Добавить задачу
+                        </button>
+                    </div>
+                    <div class="todo__currentCards">
+                        <h2 class="todo__cardsEmpty" v-if="!currentGroupCardsFiltered.length">
+                            Задач нет
+                        </h2>
+                        <div class="todo__card" v-for="(card, index) in currentGroupCardsFiltered">
+                            <div class="todo__cardHeader">
+                                <input type="text" class="todo__cardTitle"
+                                        v-model="card.name" placeholder="Задача">
+                                <div class="todo__checkboxGroup">
+                                    <input type="checkbox" class="todo__checkbox"
+                                           v-model="card.done"
+                                           :id="currentGroup.id + '_' + index">
+                                    <label :for="currentGroup.id + '_' + index"
+                                           class="todo__checkboxLabel">
+                                        Выполнено
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="todo__cardControls">
+                                <select class="todo__selector"
+                                :disabled="groups.length < 2"
+                                v-model="moveTo"
+                                @change="moveCard(index)">
+                                    <option disabled selected value="default" style="display: none">
+                                        Переместить в группу...
+                                    </option>
+                                    <option class="todo__moveToListItem" v-for="group in groups"
+                                    :value="group">
+                                        {{ group.name }}
+                                    </option>
+                                </select>
+                                <button class="todo__cardDeleteButton" type="button"
+                                        @click="confirmDelete(index, 'card')">
+                                    <img src="img/trashcan-green.png" alt="Удалить задачу">
+                                </button>
+                            </div>
+                            <textarea class="todo__cardText" v-model="card.text"
+                                      placeholder="Описание" @focus="[$event.target.style.setProperty('max-height', '300px'),
+                                                                      $event.target.style.setProperty('height', '300px'),
+                                                                      $event.target.style.setProperty('overflow', 'auto')]"
+                                                             @blur="[$event.target.style.removeProperty('max-height'),
+                                                                     $event.target.style.removeProperty('overflow')]">
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="todo__confirmModal" v-if="confirmWindow">
+                    <div class="todo__deleteConfirm">
+                        <div class="todo__deleteConfirmTitle">
+                            Подтвердите удаление?
+                        </div>
+                        <div class="todo__deleteConfirmButtons">
+                            <button class="todo__button" type="button"
+                                    @click="deleteType === 'card' ? deleteCard(deleteIndex) : deleteType === 'group' ? deleteGroup(deleteIndex) : 0">
+                                Да
+                            </button>
+                            <button class="todo__button"
+                                    type="button"
+                                    @click="confirmWindow = false">
+                                Нет
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/main.min.js"></script>
+        <script src="js/vendor.min.js"></script>
+    </body>
+</html>
