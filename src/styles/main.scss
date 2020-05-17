@@ -1,0 +1,321 @@
+@import "base/reset";
+@import "helpers/variables";
+@import "vendor/libs";
+@import "base/fonts";
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+.todo {
+  font-family: sans-serif, Arial;
+  height: 100%;
+}
+
+.todo__content {
+  height: 100%;
+  padding: 10px;
+  max-width: 1280px;
+  min-width: 320px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.todo__title {
+
+}
+
+.todo__currentGroup {
+  border: 1px solid $green;
+  box-shadow: $box-shadow;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.todo_currentGroupTitle {
+  border: none;
+  margin-bottom: 10px;
+  font-size: 25px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.todo__currentGroupControls {
+  margin-bottom: 10px;
+}
+
+.todo__button {
+  display: block;
+  background: green;
+  border: black;
+  border-radius: 5px;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all $transition-normal;
+
+  &:hover {
+    background: lightgreen;
+    color: black;
+  }
+}
+
+.todo__cardsFilter {
+  margin-bottom: 5px;
+  margin-right: 2px;
+  border: 1px solid $green;
+  vertical-align: middle;
+}
+
+.todo__checkboxGroup {
+  display: inline-block;
+  border-left: 1px solid $green;
+  padding-left: 5px;
+  vertical-align: middle;
+  margin-left: auto;
+  min-width: 120px;
+  margin-bottom: 5px;
+}
+
+.todo__checkbox {
+  vertical-align: middle;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.todo__checkboxLabel {
+  vertical-align: middle;
+  cursor: pointer;
+}
+.todo__currentCards {
+  padding: 10px;
+  border: 1px solid $green;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: $box-shadow;
+}
+
+.todo__cardsEmpty {
+  color: darkgrey;
+  text-align: center;
+}
+
+.todo__card {
+  border: 1px solid $green;
+  width: 100%;
+  padding: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  box-shadow: $box-shadow;
+  display: inline-block;
+}
+
+.todo__cardHeader {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.todo__cardTitle {
+  border: none;
+  font-size: 20px;
+  height: 21px;
+  width: 100%;
+  margin-bottom: 5px;
+  padding-right: 5px;
+}
+
+.todo__cardControls {
+  border-top: 1px solid $green;
+  border-bottom: 1px solid $green;
+  padding: 5px 0;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.todo__moveToGroup {
+
+}
+
+.todo__selector {
+  border: 1px solid $green;
+  font-size: 12px;
+}
+
+.todo__moveToListItem {
+
+}
+
+.todo__cardDeleteButton {
+  margin-left: auto;
+  background: none;
+  cursor: pointer;
+
+  img {
+    width: 25px;
+    vertical-align: middle;
+  }
+}
+
+
+.todo__cardText {
+  border: 1px solid $green;
+  padding: 5px;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 41px;
+  max-height: 41px;
+  overflow: hidden;
+}
+
+.todo__groupsList {
+  margin-bottom: 10px;
+  border: 1px solid $green;
+  box-shadow: $box-shadow;
+  border-radius: 10px;
+  //padding: 10px;
+}
+
+.todo__groupsListTitle {
+  margin: 10px 0 5px 10px;
+}
+
+.todo__groupsControls {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.todo__button {
+
+}
+
+.todo__groupsListBox {
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.todo__groupItem {
+  display: inline-block;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding: 10px;
+  -webkit-box-shadow: $box-shadow;
+  -moz-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+  max-width: 290px;
+  width: 100%;
+  margin: 5px 10px;
+
+  //&:not(:last-child) {
+  //  margin-right: 10px;
+  //}
+
+  &.isActive {
+    border: 1px solid $green;
+  }
+}
+
+.todo__groupItemHeader {
+  margin-bottom: 10px;
+  display: flex;
+  align-content: center;
+}
+
+.todo__groupControls {
+
+}
+
+.todo__groupTitle {
+  font-size: 20px;
+  width: 100%;
+}
+
+.todo__deleteButton {
+  background: none;
+  cursor: pointer;
+
+  img {
+    width: 25px;
+  }
+
+  &[disabled] {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.todo__groupItemCardsList {
+  border: 1px solid $green;
+  border-radius: 3px;
+  padding: 5px;
+  -webkit-box-shadow: $box-shadow;
+  -moz-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+}
+
+.todo__groupItemCardsListTitle {
+  font-size: 12px;
+}
+
+.todo__groupItemCardTitle {
+  border-bottom: 1px solid $green;
+}
+
+.todo__confirmModal {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.todo__deleteConfirm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 220px;
+  height: 90px;
+  border: 1px solid $green;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: $box-shadow;
+  padding-top: 15px;
+  background: white;
+}
+
+.todo__deleteConfirmTitle {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.todo__deleteConfirmButtons {
+  display: flex;
+  width: 110px;
+  justify-content: space-between;
+  margin: 0 auto;
+
+  .todo__button {
+    min-width: 48px;
+
+    &:not(:last-child) {
+
+    }
+  }
+}
